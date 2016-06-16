@@ -4,7 +4,7 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-class dic extends JFrame {
+class dic extends JFrame implements ActionListener{
 	
 	//create java frame
 	private JFrame dicGUI = new JFrame("Dictionary");
@@ -37,8 +37,8 @@ class dic extends JFrame {
 	BinarySearchTree dictionary = new BinarySearchTree();
 
 	dic(){
-		this.insertData();
-		this.createGUI();
+		this.insertData(); //insert data into binary search tree
+		this.createGUI(); //create java interface
 	}
 
 	public void createGUI(){
@@ -47,6 +47,11 @@ class dic extends JFrame {
 		//set number of colums and rows of test field
 		definitionAreaText.setColumns(20);
 		definitionAreaText.setRows(5);
+
+		searchDefBtn.addActionListener(this);
+		searchSimBtn.addActionListener(this);
+		deleteBtn.addActionListener(this);
+		clearBtn.addActionListener(this);
 
 		javax.swing.GroupLayout dicPanelLayout = new javax.swing.GroupLayout(dicPanel);
         dicPanel.setLayout(dicPanelLayout);
@@ -208,7 +213,18 @@ class dic extends JFrame {
 		d.update();
 		
 	}
+
+	//action listner
+	public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == searchDefBtn) {
+            String data = wordName.getText(); //perform your operation
+            System.out.println(data);
+        }
+    }
 }
+
+//implement class to show hits 
 class HintTextField extends JTextField implements FocusListener {
 
   private final String hint;
